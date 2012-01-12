@@ -43,7 +43,7 @@ directory.
 
  1. Clone the repo:
  
-        git clone git://github.com/perusio/nginx-cache-purge.git
+        git clone git://github.com/perusio/nginx-cache-inspector.git
     
  2. Place the script in a convenient place.
  
