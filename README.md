@@ -29,15 +29,15 @@ directory.
 
  1. Inspect `foobar.css` from the `/var/cache/nginx/baz` cache.
  
-        nginx-cache-purge "foobar.cs" /var/cache/nginx/baz
+        nginx-cache-inspector "foobar.cs" /var/cache/nginx/baz
     
  2. Inspect all JPEG files from the `/var/cache/nginx/img` cache.
  
-        nginx-cache-purge "\.jpe*g" /var/cache/nginx/img 
+        nginx-cache-inspector "\.jpe*g" /var/cache/nginx/img 
         
  3. Inspect all URIs starting with baz and match also non ASCII keys.
  
-        nginx-cache-purge "^baz" /var/cache/nginx/static 1
+        nginx-cache-inspector "^baz" /var/cache/nginx/static 1
 
 ## Installation 
 
