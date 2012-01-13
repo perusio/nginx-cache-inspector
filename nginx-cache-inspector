@@ -99,6 +99,7 @@ function nginx_cache_inspect_item() {
             fi
 
             if [ -n "$key" ]; then
+                echo "file: $i"
                 echo "key: $key TTL: $(get_cache_item_ttl $i)"
             fi
         done
