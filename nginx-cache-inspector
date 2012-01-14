@@ -71,7 +71,7 @@ function get_cache_item_ttl() {
 ## $1 - the filename, can be a pattern .
 ## $2 - the cache directory.
 function nginx_cache_inspect_item() {
-    local cache_files key
+    local cache_files key ttl
 
     [ -d $2 ] || exit 2
     cache_files=$(get_cache_files "$1" $2)
@@ -84,7 +84,11 @@ function nginx_cache_inspect_item() {
             key=$(get_cache_item_key $i)
             if [ -n "$key" ]; then
                 echo "file: $i"
-                echo "key: $key TTL: $(get_cache_item_ttl $i)"
+                ttl=$(get_cache_item_ttl $i)
+                ## If the TTL is negative that means that the item is
+                ## not found or other error.
+                [ $ttl -lt 0 ] && ttl=0
+                echo "key: $key TTL: $ttl"
             fi
         done
     else
