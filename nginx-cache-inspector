@@ -61,13 +61,12 @@ function get_cache_files() {
 ## is to filter.
 function get_cache_item_key() {
     if [ $# -eq 1 ]; then
-        local key_line=$(cat $1 | sed -n '2p' | cut -f 2 -d ':')
+        local key_line=$(cat $1 | sed -n '/^KEY:/p' | cut -f 2 -d ':')
         ## Filter all non ASCII based keys.
-        if echo $key_line | grep -q -vP '[^[:print:]]'; then
-            echo $key_line
-        fi
+        echo $key_line | grep -q -vP '[^[:print:]]'
+
     else
-        cat $1 | sed -n '2p' | cut -f 2 -d ':'
+        cat $1 | sed -n '/^KEY:/p' | cut -f 2 -d ':'
     fi
 } # get_cache_item_key
 
