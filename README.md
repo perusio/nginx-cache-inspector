@@ -16,12 +16,6 @@ This script uses `grep`
 regular expressions. Pressuposes the use of
 [GNU `grep`](http://www.gnu.org/software/grep/manual/grep.html).
 
-It **requires** a GNU grep version that supports
-[PCRE](ww.gnu.org/software/grep/manual/grep.html#grep-Programs).
-
-Non ASCII keys are usually **filtered** out. If you want to inspect non
-ASCII based keys then invoke the script with an additional 3rd argument.
-
 The script **requires** `rw` (read-write) access to the cache
 directory.
 
@@ -35,10 +29,6 @@ directory.
  
         nginx-cache-inspector "\.jpe*g" /var/cache/nginx/img 
         
- 3. Inspect all URIs starting with baz and match also non ASCII keys.
- 
-        nginx-cache-inspector "^baz" /var/cache/nginx/static 1
-
 ## Installation 
 
  1. Clone the repo:

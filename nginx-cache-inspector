@@ -33,11 +33,11 @@
 SCRIPTNAME=${0##*/}
 
 function print_usage() {
-    echo "$SCRIPTNAME <URI (grep pattern)> <cache directory> [<1 to not filter non-ASCII keys>]."
+    echo "$SCRIPTNAME <URI (grep pattern)> <cache directory>."
 }
 
 ## Check the number of arguments.
-if [ $# -lt 2 ] || [ $# -gt 3 ]; then
+if [ $# -ne 2 ]; then
     print_usage
     exit 1
 fi
@@ -57,17 +57,8 @@ function get_cache_files() {
 
 ## Print the cache item key.
 ## $1 - cache file.
-## $2 - flag that instructs not to filter non-ASCII keys. The default
-## is to filter.
 function get_cache_item_key() {
-    if [ $# -eq 1 ]; then
-        local key_line=$(cat $1 | sed -n '/^KEY:/p' | cut -f 2 -d ':')
-        ## Filter all non ASCII based keys.
-        echo $key_line | grep -q -vP '[^[:print:]]'
-
-    else
-        cat $1 | sed -n '/^KEY:/p' | cut -f 2 -d ':'
-    fi
+    cat $1 | sed -n '/^KEY:/p' | cut -f 2 -d ':'
 } # get_cache_item_key
 
 ## Get a cache item TTL.
@@ -90,13 +81,7 @@ function nginx_cache_inspect_item() {
         ## Loop over all matched items.
         for i in $cache_files; do
             [ -f $i ] || continue
-
-            if [ $# -eq 3 ]; then
-                key=$(get_cache_item_key $i $3)
-            else
-                key=$(get_cache_item_key $i)
-            fi
-
+            key=$(get_cache_item_key $i)
             if [ -n "$key" ]; then
                 echo "file: $i"
                 echo "key: $key TTL: $(get_cache_item_ttl $i)"
@@ -109,4 +94,4 @@ function nginx_cache_inspect_item() {
 } # nginx_cache_inspect_item
 
 ## Inspect the specified cache item(s).
-[ $# -eq 3 ] && nginx_cache_inspect_item $1 $2 $3 || nginx_cache_inspect_item $1 $2
+nginx_cache_inspect_item $1 $2
