@@ -11,13 +11,16 @@ It accepts a
 [`grep` pattern](http://www.gnu.org/software/grep/manual/grep.html#Fundamental-Structure)
 as argument to search for cached items in the given cache directory.
 
+It prints the **cache key**, **Time To Live** (TTL) and **expire**
+date. Both TTL and expire are printed in
+[UNIX time](https://en.wikipedia.org/wiki/Unix_time).
+
 This script uses `grep`
 [**basic**](http://www.gnu.org/software/grep/manual/grep.html#Basic-vs-Extended)
 regular expressions. Pressuposes the use of
 [GNU `grep`](http://www.gnu.org/software/grep/manual/grep.html).
 
-The script **requires** `rw` (read-write) access to the cache
-directory.
+The script **requires** `r` (read) access to the cache directory.
 
 ## Usage
 
