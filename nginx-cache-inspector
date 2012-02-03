@@ -88,7 +88,8 @@ function nginx_cache_inspect_item() {
                 ## If the TTL is negative that means that the item is
                 ## not found or other error.
                 [ $ttl -lt 0 ] && ttl=0
-                echo "key: $key TTL: $ttl"
+                expires=$(expr $ttl - $(date +%s))
+                echo "key: $key TTL: $ttl EXPIRES: $expires"
             fi
         done
     else
