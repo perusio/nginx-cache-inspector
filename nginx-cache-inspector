@@ -71,7 +71,7 @@ function get_cache_item_ttl() {
 ## $1 - the filename, can be a pattern .
 ## $2 - the cache directory.
 function nginx_cache_inspect_item() {
-    local cache_files key ttl
+    local cache_files key ttl expires
 
     [ -d $2 ] || exit 2
     cache_files=$(get_cache_files "$1" $2)
