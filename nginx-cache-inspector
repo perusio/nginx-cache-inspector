@@ -58,7 +58,7 @@ function get_cache_files() {
 ## Print the cache item key.
 ## $1 - cache file.
 function get_cache_item_key() {
-    cat $1 | sed -n '/^KEY:/p' | cut -f 2 -d ':'
+    cat $1 | sed -n '/^KEY:/p' | cut -f 2- -d ':'
 } # get_cache_item_key
 
 ## Get a cache item TTL.
